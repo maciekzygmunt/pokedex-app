@@ -2,9 +2,11 @@ import styled from 'styled-components';
 import { Badge } from '@mantine/core';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import InfoModal from './InfoModal';
 
 function PokemonItem({ pokemon }) {
   const [sprites, setSprites] = useState([]);
+  const [opened, setOpened] = useState(false);
 
   useEffect(() => {
     const spritesHelper = [];
@@ -17,32 +19,35 @@ function PokemonItem({ pokemon }) {
   }, []);
 
   return (
-    <Wrapper>
-      <Name>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</Name>
-      <StatsWrapper>
-        <ImageWrapper>
-          <Image src={pokemon.sprites.other['dream_world']['front_default']} />
-        </ImageWrapper>
-        <TypesWrapper>
-          <p>Types: </p>
-          {pokemon.types.map((typeData, i) => (
-            <BadgeWrapper>
-              <Badge key={i} radius="md">
-                {typeData.type.name}
-              </Badge>
-            </BadgeWrapper>
-          ))}
-        </TypesWrapper>
-        <SpritesWrapper>
-          <p>Sprites: </p>
-          {sprites.map((img, i) => (
-            <SpriteImageWrapper>
-              <SpriteImage key={i} src={img} />
-            </SpriteImageWrapper>
-          ))}
-        </SpritesWrapper>
-      </StatsWrapper>
-    </Wrapper>
+    <>
+      <InfoModal opened={opened} setOpened={setOpened} pokemon={pokemon} />
+      <Wrapper onClick={() => setOpened(true)}>
+        <Name>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</Name>
+        <StatsWrapper>
+          <ImageWrapper>
+            <Image src={pokemon.sprites.other['dream_world']['front_default']} />
+          </ImageWrapper>
+          <TypesWrapper>
+            <p>Types: </p>
+            {pokemon.types.map((typeData, i) => (
+              <BadgeWrapper>
+                <Badge key={i} radius="md">
+                  {typeData.type.name}
+                </Badge>
+              </BadgeWrapper>
+            ))}
+          </TypesWrapper>
+          <SpritesWrapper>
+            <p>Sprites: </p>
+            {sprites.map((img, i) => (
+              <SpriteImageWrapper>
+                <SpriteImage key={i} src={img} />
+              </SpriteImageWrapper>
+            ))}
+          </SpritesWrapper>
+        </StatsWrapper>
+      </Wrapper>
+    </>
   );
 }
 
@@ -54,7 +59,8 @@ const Wrapper = styled.div`
   box-shadow: 0px 0px 39px -7px rgba(66, 68, 90, 1);
   cursor: pointer;
   transition: transform 150ms ease-out;
-  &:hover {
+  &:hover,
+  &:active {
     transform: scale(1.01);
   }
 `;
@@ -106,10 +112,17 @@ const SpritesWrapper = styled.div`
   display: flex;
   column-gap: 0.2rem;
   align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const SpriteImageWrapper = styled.div`
   height: 3rem;
+  flex-shrink: 0;
 `;
 
 const SpriteImage = styled.img`
