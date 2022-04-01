@@ -5,6 +5,7 @@ import Header from './UI/Header';
 import { pokemonsActions } from './store/pokemons-slice';
 import { Loader } from '@mantine/core';
 import styled from 'styled-components';
+import Button from './components/Button';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,9 +40,7 @@ function App() {
         </LoaderWrapper>
       )}
       {!isLoading && <PokemonsList />}
-      {!isLoading && (
-        <LoadMoreButton onClick={() => setOffset((state) => state + 20)}>Load More</LoadMoreButton>
-      )}
+      {!isLoading && <Button onClick={() => setOffset((state) => state + 20)}>Load More</Button>}
     </>
   );
 }
@@ -51,24 +50,6 @@ const LoaderWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const LoadMoreButton = styled.button`
-  cursor: pointer;
-  background: #3762f0;
-  font-size: 1.2rem;
-  color: #fad61f;
-  border: none;
-  height: 3rem;
-  width: 8rem;
-  border-radius: 7px;
-  box-shadow: 0px 0px 13px -7px rgba(66, 68, 90, 1);
-  display: block;
-  margin: 1rem auto;
-  &:hover,
-  &:active {
-    background: #0a42fc;
-  }
 `;
 
 export default App;

@@ -22,6 +22,7 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
   box-shadow: 0px 0px 13px -7px rgba(66, 68, 90, 1);
+  z-index: 50;
 `;
 
 const ImageWrapper = styled.div`
