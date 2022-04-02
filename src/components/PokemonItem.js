@@ -3,10 +3,12 @@ import { Badge } from '@mantine/core';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import InfoModal from './InfoModal';
+import { useSelector } from 'react-redux';
 
 function PokemonItem({ pokemon }) {
   const [sprites, setSprites] = useState([]);
   const [opened, setOpened] = useState(false);
+  const lightTheme = useSelector((state) => state.theme.lightTheme);
 
   useEffect(() => {
     const spritesHelper = [];
@@ -22,12 +24,14 @@ function PokemonItem({ pokemon }) {
     <>
       <InfoModal opened={opened} setOpened={setOpened} pokemon={pokemon} />
       <Wrapper onClick={() => setOpened(true)}>
-        <Name>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</Name>
+        <Name lightTheme={lightTheme}>
+          {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+        </Name>
         <StatsWrapper>
           <ImageWrapper>
             <Image src={pokemon.sprites.other['dream_world']['front_default']} />
           </ImageWrapper>
-          <TypesWrapper>
+          <TypesWrapper lightTheme={lightTheme}>
             <p>Types: </p>
             {pokemon.types.map((typeData, i) => (
               <BadgeWrapper>
@@ -37,7 +41,7 @@ function PokemonItem({ pokemon }) {
               </BadgeWrapper>
             ))}
           </TypesWrapper>
-          <SpritesWrapper>
+          <SpritesWrapper lightTheme={lightTheme}>
             <p>Sprites: </p>
             {sprites.map((img, i) => (
               <SpriteImageWrapper>
@@ -76,6 +80,7 @@ const Name = styled.p`
   text-align: center;
   font-size: 1.5rem;
   margin-top: 0.3rem;
+  color: ${(props) => (props.lightTheme ? 'black' : 'white')};
 `;
 
 const ImageWrapper = styled.div`
@@ -86,7 +91,6 @@ const ImageWrapper = styled.div`
   border-radius: 9999px;
   padding: 1rem;
   margin: 0 1rem;
-
   overflow: hidden;
 `;
 
@@ -100,6 +104,8 @@ const TypesWrapper = styled.div`
   margin: auto 0;
   display: flex;
   column-gap: 0.2rem;
+  overflow-x: hidden;
+  color: ${(props) => (props.lightTheme ? 'black' : 'white')};
 `;
 const BadgeWrapper = styled.div`
   margin-right: 0.2rem;
@@ -116,6 +122,7 @@ const SpritesWrapper = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
+  color: ${(props) => (props.lightTheme ? 'black' : 'white')};
   &::-webkit-scrollbar {
     display: none;
   }

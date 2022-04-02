@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { Modal } from '@mantine/core';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 function InfoModal({ opened, setOpened, pokemon }) {
+  const lightTheme = useSelector((state) => state.theme.lightTheme);
   return (
-    <>
-      <Modal opened={opened} onClose={() => setOpened(false)} title="">
-        <Wrapper>
-          <ImageWrapper>
-            <PokeImg src={pokemon.sprites.other['dream_world']['front_default']} />
-          </ImageWrapper>
-          <Name>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</Name>
-          <Stat>Height: {pokemon.height}</Stat>
-          <Stat>Weight: {pokemon.weight}</Stat>
-        </Wrapper>
-      </Modal>
-    </>
+    <Modal opened={opened} onClose={() => setOpened(false)} title="">
+      <Wrapper>
+        <ImageWrapper>
+          <PokeImg src={pokemon.sprites.other['dream_world']['front_default']} />
+        </ImageWrapper>
+        <Name>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</Name>
+        <Stat>Height: {pokemon.height}</Stat>
+        <Stat>Weight: {pokemon.weight}</Stat>
+      </Wrapper>
+    </Modal>
   );
 }
 

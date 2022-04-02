@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ThemeButton from '../components/ThemeButton';
 
 function Header() {
   return (
@@ -7,6 +8,7 @@ function Header() {
         <Image src="https://www.pngmart.com/files/2/Pikachu-PNG-HD.png" alt="pikachu" />
       </ImageWrapper>
       <Title>PokeDex</Title>
+      <ThemeButton />
     </Wrapper>
   );
 }
