@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { act } from 'react-dom/test-utils';
 
 const themeSlice = createSlice({
   name: 'theme',
@@ -8,6 +9,10 @@ const themeSlice = createSlice({
   reducers: {
     toggleTheme(state, action) {
       state.lightTheme = !state.lightTheme;
+      localStorage.setItem('lightTheme', state.lightTheme);
+    },
+    setTheme(state, action) {
+      state.lightTheme = action.payload;
     },
   },
 });

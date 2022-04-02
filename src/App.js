@@ -7,12 +7,24 @@ import { Loader } from '@mantine/core';
 import styled from 'styled-components';
 import Button from './components/Button';
 import { MantineProvider } from '@mantine/core';
+import { themeActions } from './store/theme-slice';
 
 function App() {
   const lightTheme = useSelector((state) => state.theme.lightTheme);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const lightTheme = localStorage.getItem('lightTheme');
+    console.log(lightTheme);
+    if (lightTheme === 'true') {
+      dispatch(themeActions.setTheme(true));
+    }
+    if (lightTheme === 'false') {
+      dispatch(themeActions.setTheme(false));
+    }
+  }, []);
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -70,6 +82,8 @@ function App() {
 }
 const BodyWrapper = styled.div`
   background: ${(props) => (props.lightTheme ? '#ffffff' : '#25262B')};
+  transition: all 150ms ease-out;
+  padding-bottom: 1rem;
 `;
 
 const LoaderWrapper = styled.div`

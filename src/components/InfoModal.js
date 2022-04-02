@@ -1,10 +1,7 @@
-import { useState } from 'react';
 import { Modal } from '@mantine/core';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 function InfoModal({ opened, setOpened, pokemon }) {
-  const lightTheme = useSelector((state) => state.theme.lightTheme);
   return (
     <Modal opened={opened} onClose={() => setOpened(false)} title="">
       <Wrapper>

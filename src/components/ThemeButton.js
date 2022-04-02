@@ -25,7 +25,7 @@ const ThemeBtn = styled.button`
   height: 2.5rem;
   border: none;
   border-radius: 10px;
-  transition: transform 150ms ease-out;
+  transition: all 150ms ease-out;
   background: ${(props) => (props.lightTheme ? '#ffffff' : '#25262B')};
   color: ${(props) => (props.lightTheme ? '#3762f0' : '#fad61f')};
   &:hover {
