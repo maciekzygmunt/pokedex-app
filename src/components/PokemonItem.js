@@ -53,8 +53,9 @@ function PokemonItem({ pokemon }) {
 
 const Wrapper = styled.div`
   height: 10rem;
-  margin: 1rem 1rem 1rem 1rem;
   border: 1px solid #828282;
+  max-width: 40rem;
+  margin: 0 auto;
   border-radius: 6px;
   box-shadow: 0px 0px 39px -7px rgba(66, 68, 90, 1);
   cursor: pointer;
