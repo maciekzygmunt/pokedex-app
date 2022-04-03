@@ -1,4 +1,3 @@
-import { ActionIcon, useMantineColorScheme } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { Sun, MoonStars } from 'tabler-icons-react';
 import { themeActions } from '../store/theme-slice';
