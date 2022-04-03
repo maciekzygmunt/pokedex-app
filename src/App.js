@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     const lightTheme = localStorage.getItem('lightTheme');
-    console.log(lightTheme);
+
     if (lightTheme === 'true') {
       dispatch(themeActions.setTheme(true));
     }
@@ -38,7 +38,6 @@ function App() {
           dispatch(pokemonsActions.appendPokemons(data));
           setIsLoading(false);
         }
-        console.log(data);
       });
     };
 
